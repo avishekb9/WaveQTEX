@@ -1,0 +1,54 @@
+# GitHub Pages configuration for WaveQTEX Web Interface
+title: "WaveQTEX Web Interface"
+description: "Interactive web interface for WaveQTE Network Economics analysis"
+url: "https://avishekb9.github.io"
+baseurl: "/WaveQTEX"
+
+# Theme
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - CNAME
+
+# Include
+include:
+  - _config.yml
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# SEO
+author: "Avishek Bhandari"
+twitter:
+  username: avishekb9
+  
+social:
+  name: "Avishek Bhandari"
+  links:
+    - "https://github.com/avishekb9"
+
+# Analytics (optional)
+google_analytics: ""
+
+# Comments (optional)
+disqus:
+  shortname: ""
+
+# Social sharing (optional)
+sharing:
+  twitter: true
+  facebook: true
+  linkedin: true

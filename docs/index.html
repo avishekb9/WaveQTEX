@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaveQTE Network Economics | Real-Time Financial Network Analysis</title>
+    
+    <!-- Meta tags for SEO and social media -->
+    <meta name="description" content="Advanced financial network analysis using WaveQTE methodology with AI agents and multi-scale dynamics">
+    <meta name="keywords" content="financial networks, systemic risk, WaveQTE, AI agents, network economics">
+    <meta property="og:title" content="WaveQTE Network Economics">
+    <meta property="og:description" content="Real-time financial network analysis platform">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="wave-animation">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            </div>
+            <h2>WaveQTE Network Economics</h2>
+            <p>Initializing financial network analysis...</p>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <span class="brand-text">WaveQTE</span>
+            </div>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#network" class="nav-link" data-section="network">
+                        <i class="fas fa-network-wired"></i>
+                        <span>Network</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#agents" class="nav-link" data-section="agents">
+                        <i class="fas fa-users-cog"></i>
+                        <span>Agents</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#risk" class="nav-link" data-section="risk">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Risk Monitor</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#analysis" class="nav-link" data-section="analysis">
+                        <i class="fas fa-microscope"></i>
+                        <span>Analysis</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-controls">
+                <a href="https://github.com/avishekb9/WaveQTEX" class="control-btn" title="GitHub Repository" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <button class="control-btn" id="theme-toggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="control-btn" id="fullscreen-toggle" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                <div class="status-indicator">
+                    <div class="status-dot active"></div>
+                    <span class="status-text">Live</span>
+                </div>
+            </div>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="section-header">
+                <h1>Financial Network Dashboard</h1>
+                <p>Real-time monitoring of global financial market interconnections</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <!-- Key Metrics Cards -->
+                <div class="metrics-row">
+                    <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="metric-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Systemic Risk Index</h3>
+                            <div class="metric-value" id="sri-value">0.342</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>-2.4%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="metric-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Network Density</h3>
+                            <div class="metric-value" id="density-value">0.658</div>
+                            <div class="metric-change neutral">
+                                <i class="fas fa-minus"></i>
+                                <span>0.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="metric-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Active Agents</h3>
+                            <div class="metric-value" id="agents-value">1,247</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+5.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="metric-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Transfer Entropy</h3>
+                            <div class="metric-value" id="te-value">0.783</div>
+                            <div class="metric-change negative">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>+1.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Visualization Area -->
+                <div class="viz-container">
+                    <div class="chart-panel" data-aos="fade-up" data-aos-delay="500">
+                        <div class="panel-header">
+                            <h3>Multi-Scale Network Evolution</h3>
+                            <div class="panel-controls">
+                                <select id="scale-selector" class="control-select">
+                                    <option value="all">All Scales</option>
+                                    <option value="1">Scale 1 (Daily)</option>
+                                    <option value="2">Scale 2 (Weekly)</option>
+                                    <option value="3">Scale 3 (Monthly)</option>
+                                    <option value="4">Scale 4 (Quarterly)</option>
+                                </select>
+                                <button class="control-btn small" id="play-pause">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-content">
+                            <canvas id="network-canvas" class="main-canvas"></canvas>
+                            <div class="chart-overlay">
+                                <div class="scale-legend" id="scale-legend"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="side-panel">
+                        <!-- Market Heatmap -->
+                        <div class="mini-panel" data-aos="fade-left" data-aos-delay="600">
+                            <h4>Market Correlation Matrix</h4>
+                            <div id="correlation-heatmap" class="heatmap-container"></div>
+                        </div>
+                        
+                        <!-- Risk Timeline -->
+                        <div class="mini-panel" data-aos="fade-left" data-aos-delay="700">
+                            <h4>Risk Evolution</h4>
+                            <canvas id="risk-timeline" class="mini-canvas"></canvas>
+                        </div>
+                        
+                        <!-- Agent Activity -->
+                        <div class="mini-panel" data-aos="fade-left" data-aos-delay="800">
+                            <h4>Agent Activity</h4>
+                            <div id="agent-activity" class="activity-list"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Information Panels -->
+                <div class="info-panels">
+                    <div class="info-panel" data-aos="fade-up" data-aos-delay="900">
+                        <h4>Market Status</h4>
+                        <div class="status-grid" id="market-status"></div>
+                    </div>
+                    
+                    <div class="info-panel" data-aos="fade-up" data-aos-delay="1000">
+                        <h4>Recent Alerts</h4>
+                        <div class="alerts-list" id="alerts-list"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Network Section -->
+        <section id="network" class="content-section">
+            <div class="section-header">
+                <h1>3D Network Visualization</h1>
+                <p>Interactive exploration of multi-scale financial networks</p>
+            </div>
+            
+            <div class="network-container">
+                <div class="network-controls">
+                    <div class="control-group">
+                        <label>Time Scale</label>
+                        <div class="scale-buttons" id="scale-buttons">
+                            <button class="scale-btn active" data-scale="1">1D</button>
+                            <button class="scale-btn" data-scale="2">1W</button>
+                            <button class="scale-btn" data-scale="3">1M</button>
+                            <button class="scale-btn" data-scale="4">1Q</button>
+                            <button class="scale-btn" data-scale="5">1Y</button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Layout Algorithm</label>
+                        <select id="layout-selector" class="control-select">
+                            <option value="force">Force-Directed</option>
+                            <option value="circular">Circular</option>
+                            <option value="hierarchical">Hierarchical</option>
+                            <option value="geographic">Geographic</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Edge Threshold</label>
+                        <input type="range" id="edge-threshold" min="0" max="1" step="0.01" value="0.3" class="control-slider">
+                        <span id="threshold-value">0.30</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Node Size</label>
+                        <select id="node-size" class="control-select">
+                            <option value="centrality">Centrality</option>
+                            <option value="volume">Volume</option>
+                            <option value="volatility">Volatility</option>
+                            <option value="uniform">Uniform</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="network-main">
+                    <div id="network-3d" class="network-3d-container"></div>
+                    
+                    <div class="network-info">
+                        <div class="info-card">
+                            <h4>Network Statistics</h4>
+                            <div class="stat-row">
+                                <span>Nodes:</span>
+                                <span id="node-count">24</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Edges:</span>
+                                <span id="edge-count">156</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Density:</span>
+                                <span id="network-density">0.68</span>
+                            </div>
+                            <div class="stat-row">
+                                <span>Clustering:</span>
+                                <span id="clustering-coeff">0.42</span>
+                            </div>
+                        </div>
+                        
+                        <div class="legend-card">
+                            <h4>Legend</h4>
+                            <div class="legend-item">
+                                <div class="legend-color developed"></div>
+                                <span>Developed Markets</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color emerging"></div>
+                                <span>Emerging Markets</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color central"></div>
+                                <span>Central Nodes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Agents Section -->
+        <section id="agents" class="content-section">
+            <div class="section-header">
+                <h1>AI Agent Management</h1>
+                <p>Monitor and control heterogeneous trading agents</p>
+            </div>
+            
+            <div class="agents-container">
+                <div class="agents-overview">
+                    <div class="agent-type-cards">
+                        <div class="agent-card hft">
+                            <div class="agent-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3>High-Frequency Traders</h3>
+                            <div class="agent-count">
+                                <span class="count">52</span>
+                                <span class="label">Active</span>
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <span>Avg. Latency:</span>
+                                    <span>0.3ms</span>
+                                </div>
+                                <div class="metric">
+                                    <span>Success Rate:</span>
+                                    <span>98.7%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="agent-card market-maker">
+                            <div class="agent-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h3>Market Makers</h3>
+                            <div class="agent-count">
+                                <span class="count">23</span>
+                                <span class="label">Active</span>
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <span>Spread:</span>
+                                    <span>0.12%</span>
+                                </div>
+                                <div class="metric">
+                                    <span>Inventory:</span>
+                                    <span>85%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="agent-card institutional">
+                            <div class="agent-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>Institutional Investors</h3>
+                            <div class="agent-count">
+                                <span class="count">31</span>
+                                <span class="label">Active</span>
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <span>AUM:</span>
+                                    <span>$2.3T</span>
+                                </div>
+                                <div class="metric">
+                                    <span>Tracking Error:</span>
+                                    <span>0.08%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="agent-card regulator">
+                            <div class="agent-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Regulators</h3>
+                            <div class="agent-count">
+                                <span class="count">5</span>
+                                <span class="label">Active</span>
+                            </div>
+                            <div class="agent-metrics">
+                                <div class="metric">
+                                    <span>Interventions:</span>
+                                    <span>3</span>
+                                </div>
+                                <div class="metric">
+                                    <span>Risk Score:</span>
+                                    <span>Low</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="agent-details">
+                    <div class="detail-panel">
+                        <h3>Agent Communication Network</h3>
+                        <div id="agent-network" class="agent-network-viz"></div>
+                    </div>
+                    
+                    <div class="detail-panel">
+                        <h3>Performance Metrics</h3>
+                        <canvas id="agent-performance" class="performance-chart"></canvas>
+                    </div>
+                    
+                    <div class="detail-panel">
+                        <h3>MCP Protocol Status</h3>
+                        <div class="protocol-status">
+                            <div class="status-item">
+                                <span class="status-label">Messages/sec:</span>
+                                <span class="status-value">1,247</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Bandwidth:</span>
+                                <span class="status-value">78%</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Latency:</span>
+                                <span class="status-value">2.3ms</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label">Success Rate:</span>
+                                <span class="status-value">99.2%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Risk Monitor Section -->
+        <section id="risk" class="content-section">
+            <div class="section-header">
+                <h1>Systemic Risk Monitor</h1>
+                <p>Early warning system for financial stability</p>
+            </div>
+            
+            <div class="risk-container">
+                <div class="risk-overview">
+                    <div class="risk-gauge">
+                        <canvas id="risk-gauge" class="gauge-canvas"></canvas>
+                        <div class="gauge-label">
+                            <h3>Current Risk Level</h3>
+                            <span class="risk-level moderate">Moderate</span>
+                        </div>
+                    </div>
+                    
+                    <div class="risk-components">
+                        <div class="component">
+                            <div class="component-header">
+                                <span>Market Risk</span>
+                                <span class="component-value">0.34</span>
+                            </div>
+                            <div class="component-bar">
+                                <div class="bar-fill" style="width: 34%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="component">
+                            <div class="component-header">
+                                <span>Credit Risk</span>
+                                <span class="component-value">0.28</span>
+                            </div>
+                            <div class="component-bar">
+                                <div class="bar-fill" style="width: 28%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="component">
+                            <div class="component-header">
+                                <span>Liquidity Risk</span>
+                                <span class="component-value">0.42</span>
+                            </div>
+                            <div class="component-bar">
+                                <div class="bar-fill" style="width: 42%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="component">
+                            <div class="component-header">
+                                <span>Operational Risk</span>
+                                <span class="component-value">0.19</span>
+                            </div>
+                            <div class="component-bar">
+                                <div class="bar-fill" style="width: 19%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="risk-charts">
+                    <div class="chart-panel">
+                        <h3>Risk Evolution</h3>
+                        <canvas id="risk-evolution" class="chart-canvas"></canvas>
+                    </div>
+                    
+                    <div class="chart-panel">
+                        <h3>Early Warning Indicators</h3>
+                        <div class="indicators-grid">
+                            <div class="indicator">
+                                <div class="indicator-icon ok">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-name">VIX Spike</span>
+                                    <span class="indicator-status">Normal</span>
+                                </div>
+                            </div>
+                            
+                            <div class="indicator">
+                                <div class="indicator-icon warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-name">Credit Spreads</span>
+                                    <span class="indicator-status">Elevated</span>
+                                </div>
+                            </div>
+                            
+                            <div class="indicator">
+                                <div class="indicator-icon ok">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-name">Liquidity</span>
+                                    <span class="indicator-status">Stable</span>
+                                </div>
+                            </div>
+                            
+                            <div class="indicator">
+                                <div class="indicator-icon critical">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                                <div class="indicator-content">
+                                    <span class="indicator-name">Correlation</span>
+                                    <span class="indicator-status">High</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Section -->
+        <section id="analysis" class="content-section">
+            <div class="section-header">
+                <h1>Advanced Analysis</h1>
+                <p>Deep dive into network dynamics and market behavior</p>
+            </div>
+            
+            <div class="analysis-container">
+                <div class="analysis-tools">
+                    <div class="tool-panel">
+                        <h3>Wavelet Analysis</h3>
+                        <div class="tool-controls">
+                            <label>Wavelet Type:</label>
+                            <select class="control-select">
+                                <option value="daubechies">Daubechies</option>
+                                <option value="haar">Haar</option>
+                                <option value="biorthogonal">Biorthogonal</option>
+                            </select>
+                            
+                            <label>Decomposition Levels:</label>
+                            <input type="range" min="3" max="8" value="6" class="control-slider">
+                        </div>
+                        <button class="action-btn">Run Analysis</button>
+                    </div>
+                    
+                    <div class="tool-panel">
+                        <h3>Transfer Entropy</h3>
+                        <div class="tool-controls">
+                            <label>Lag Order:</label>
+                            <input type="number" min="1" max="10" value="3" class="control-input">
+                            
+                            <label>Quantile:</label>
+                            <select class="control-select">
+                                <option value="0.05">5%</option>
+                                <option value="0.95">95%</option>
+                                <option value="both">Both</option>
+                            </select>
+                        </div>
+                        <button class="action-btn">Calculate TE</button>
+                    </div>
+                    
+                    <div class="tool-panel">
+                        <h3>Stress Testing</h3>
+                        <div class="tool-controls">
+                            <label>Scenario:</label>
+                            <select class="control-select">
+                                <option value="market_crash">Market Crash</option>
+                                <option value="liquidity_crisis">Liquidity Crisis</option>
+                                <option value="sovereign_crisis">Sovereign Crisis</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                            
+                            <label>Severity:</label>
+                            <input type="range" min="1" max="5" value="3" class="control-slider">
+                        </div>
+                        <button class="action-btn">Run Stress Test</button>
+                    </div>
+                </div>
+                
+                <div class="analysis-results">
+                    <div class="result-panel">
+                        <h3>Analysis Results</h3>
+                        <div id="analysis-output" class="output-container">
+                            <p>Select an analysis tool to view results...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>WaveQTE Network Economics</h4>
+                <p>Advanced financial network analysis platform powered by AI agents and multi-scale dynamics.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Documentation</h4>
+                <ul>
+                    <li><a href="#api-docs">API Reference</a></li>
+                    <li><a href="#user-guide">User Guide</a></li>
+                    <li><a href="#research">Research Papers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <div class="social-links">
+                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 WaveQTE Research Consortium. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/network-3d.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/agents.js"></script>
+    <script src="js/risk-monitor.js"></script>
+    <script src="js/data-handler.js"></script>
+</body>
+</html>
