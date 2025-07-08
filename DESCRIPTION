@@ -1,0 +1,62 @@
+Package: WaveQTEX
+Type: Package
+Title: Extended Wavelet-Based Quantile Transfer Entropy Networks with Machine Learning Integration
+Version: 1.0.0
+Date: 2024-07-08
+Authors@R: c(
+    person("Extended WaveQTE Research Consortium", role = c("aut", "cre"), 
+           email = "research@waveqte-enhanced.org"),
+    person("Avishek Bhandari", role = "ctb", 
+           comment = "Original WaveQTE methodology"))
+Description: Comprehensive framework for analyzing financial contagion using 
+    Wavelet-based Quantile Transfer Entropy (WaveQTE) with machine learning 
+    enhancements, efficient market hypothesis testing, and macroprudential 
+    applications. This package extends the foundational WaveQTE methodology 
+    with deep learning integration, multi-scale market efficiency testing, 
+    and real-time macroprudential monitoring capabilities. Includes tools for 
+    convolutional neural networks, LSTM models, transformer architectures, 
+    ensemble learning, scale-dependent efficiency analysis, systemic risk 
+    assessment, and early warning systems for financial crisis prediction.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 4.0.0)
+Imports:
+    wavelets,
+    igraph,
+    ggplot2,
+    dplyr,
+    tidyr,
+    magrittr,
+    parallel,
+    Matrix,
+    xts,
+    zoo,
+    forecast,
+    tseries,
+    urca,
+    vars,
+    caret,
+    randomForest,
+    quantmod,
+    TTR,
+    corrplot,
+    stats,
+    utils
+Suggests:
+    testthat (>= 3.0.0),
+    torch,
+    keras,
+    tensorflow,
+    xgboost,
+    RTransferEntropy,
+    plotly,
+    DT,
+    shiny,
+    shinydashboard,
+    rmarkdown,
+    devtools
+RoxygenNote: 7.2.3
+URL: https://github.com/avishekb9/WaveQTEX
+BugReports: https://github.com/avishekb9/WaveQTEX/issues
