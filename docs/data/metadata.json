@@ -1,8 +1,21 @@
 {
-  "last_updated": "2025-07-08 23:34:46.793262",
+  "last_updated": "2025-07-09 00:25:13.055342",
+  "update_id": 1752000913,
   "markets_count": 16,
-  "data_sources": ["Simulated Market Data", "WaveQTE Analysis", "Agent Simulation"],
+  "network_configurations": 9,
+  "agent_types": 4,
+  "data_sources": ["Simulated Market Data", "WaveQTE Analysis", "Agent-Based Modeling"],
   "update_frequency": "Every 6 hours via GitHub Actions",
   "version": "1.0.0",
-  "status": "active"
+  "status": "active",
+  "data_quality": {
+    "completeness": 1,
+    "freshness_hours": 0,
+    "accuracy_score": 0.95
+  },
+  "system_info": {
+    "r_version": "4.5.1",
+    "platform": "x86_64-pc-linux-gnu",
+    "generation_time_seconds": 0.44
+  }
 }

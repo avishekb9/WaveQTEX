@@ -2,30 +2,44 @@
   "hft": {
     "count": 50,
     "avg_performance": 0.92,
-    "avg_latency": 0.8,
-    "total_messages": 3500,
-    "active_ratio": 0.94
+    "avg_latency": 0.75,
+    "total_messages": 3183,
+    "active_ratio": 0.964,
+    "profit_24h": 16620.31,
+    "risk_exposure": 0.192
   },
   "market_maker": {
     "count": 20,
     "avg_performance": 0.87,
-    "avg_latency": 1.5,
-    "total_messages": 1800,
-    "active_ratio": 0.9
+    "avg_latency": 1.56,
+    "total_messages": 1587,
+    "active_ratio": 0.85,
+    "profit_24h": 19111.67,
+    "risk_exposure": 0.393
   },
   "institutional": {
     "count": 30,
     "avg_performance": 0.81,
-    "avg_latency": 2.8,
-    "total_messages": 850,
-    "active_ratio": 0.96
+    "avg_latency": 2.96,
+    "total_messages": 863,
+    "active_ratio": 0.943,
+    "profit_24h": 63919.6,
+    "risk_exposure": 0.112
   },
   "regulator": {
     "count": 5,
     "avg_performance": 0.99,
-    "avg_latency": 0.6,
-    "total_messages": 150,
-    "active_ratio": 1
+    "avg_latency": 0.59,
+    "total_messages": 156,
+    "active_ratio": 1,
+    "profit_24h": 0,
+    "risk_exposure": 0
   },
-  "timestamp": "2025-07-08 23:34:46.793262"
+  "mcp_status": {
+    "protocols_active": 8,
+    "bandwidth_usage": 88.7,
+    "message_success_rate": 0.9953,
+    "avg_protocol_latency": 1.57
+  },
+  "timestamp": "2025-07-09 00:25:13.055342"
 }

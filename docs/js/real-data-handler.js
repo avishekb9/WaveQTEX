@@ -335,6 +335,21 @@ class RealDataHandler {
         if (marketsCountElement) {
             marketsCountElement.textContent = metadata.markets_count;
         }
+        
+        // Update data status indicator
+        const statusDot = document.getElementById('data-status-dot');
+        const statusText = document.getElementById('data-status-text');
+        
+        if (statusDot && statusText) {
+            statusDot.className = 'fas fa-circle';
+            statusDot.style.color = '#4caf50';
+            statusText.textContent = 'Live Data';
+            
+            const indicator = statusDot.closest('.data-indicator');
+            if (indicator) {
+                indicator.classList.remove('loading', 'error');
+            }
+        }
     }
     
     startPeriodicUpdates() {
@@ -347,9 +362,37 @@ class RealDataHandler {
     handleLoadError(error) {
         console.error('Data loading error:', error);
         
+        // Update status indicator to show error
+        const statusDot = document.getElementById('data-status-dot');
+        const statusText = document.getElementById('data-status-text');
+        
+        if (statusDot && statusText) {
+            statusDot.className = 'fas fa-exclamation-triangle';
+            statusDot.style.color = '#ff5722';
+            statusText.textContent = 'Fallback Data';
+            
+            const indicator = statusDot.closest('.data-indicator');
+            if (indicator) {
+                indicator.classList.add('error');
+            }
+        }
+        
         this.retryCount++;
         if (this.retryCount < this.maxRetries) {
             console.log(`Retrying data load (${this.retryCount}/${this.maxRetries})...`);
+            
+            // Show loading state
+            if (statusDot && statusText) {
+                statusDot.className = 'fas fa-sync-alt';
+                statusDot.style.color = '#ffc947';
+                statusText.textContent = `Retrying (${this.retryCount}/${this.maxRetries})`;
+                
+                const indicator = statusDot.closest('.data-indicator');
+                if (indicator) {
+                    indicator.classList.add('loading');
+                }
+            }
+            
             setTimeout(() => this.loadAllData(), 5000);
         } else {
             console.log('Max retries reached, using fallback data');

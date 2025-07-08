@@ -11,15 +11,19 @@ on:
       - 'data-pipeline/**'
       - '.github/workflows/update-data.yml'
 
+permissions:
+  contents: write  # Required for pushing changes
+
 jobs:
   update-data:
     runs-on: ubuntu-latest
     
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0  # Fetch full history for better Git operations
     
     - name: Set up R
       uses: r-lib/actions/setup-r@v2
@@ -29,8 +33,8 @@ jobs:
     
     - name: Install system dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y \
+        sudo apt-get update -qq
+        sudo apt-get install -y --no-install-recommends \
           libcurl4-openssl-dev \
           libssl-dev \
           libxml2-dev \
@@ -40,49 +44,199 @@ jobs:
           libfreetype6-dev \
           libpng-dev \
           libtiff5-dev \
-          libjpeg-dev
+          libjpeg-dev \
+          pandoc
     
-    - name: Install R dependencies
+    - name: Cache R packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.local/share/renv
+        key: ${{ runner.os }}-r-${{ hashFiles('**/renv.lock') }}
+        restore-keys: ${{ runner.os }}-r-
+    
+    - name: Install essential R packages
       run: |
+        # Install only the essential packages needed for data generation
         Rscript -e "
-          install.packages(c('remotes', 'jsonlite', 'dplyr', 'quantmod', 'devtools'))
-          remotes::install_deps(dependencies = TRUE)
-          devtools::install('.')
+          cat('Installing essential R packages...\n')
+          
+          # Install jsonlite first as it's critical
+          if (!require('jsonlite', quietly = TRUE)) {
+            install.packages('jsonlite', repos = 'https://cloud.r-project.org/')
+          }
+          cat('✓ jsonlite installed\n')
+          
+          # Test that jsonlite works
+          library(jsonlite)
+          test_json <- toJSON(list(test = 'success'), auto_unbox = TRUE)
+          cat('✓ jsonlite test passed\n')
+          
+          cat('R package installation completed\n')
         "
     
-    - name: Create data directory
-      run: mkdir -p docs/data
+    - name: Verify R environment
+      run: |
+        Rscript -e "
+          cat('=== R ENVIRONMENT VERIFICATION ===\n')
+          cat('R version:', R.version.string, '\n')
+          cat('Platform:', R.version\$platform, '\n')
+          cat('Working directory:', getwd(), '\n')
+          
+          # Check required packages
+          required_packages <- c('jsonlite')
+          for (pkg in required_packages) {
+            if (require(pkg, character.only = TRUE, quietly = TRUE)) {
+              cat('✓', pkg, 'available\n')
+            } else {
+              cat('✗', pkg, 'missing\n')
+              quit(status = 1)
+            }
+          }
+          
+          cat('=== VERIFICATION COMPLETED ===\n')
+        "
     
-    - name: Run data pipeline
+    - name: Create output directory
+      run: |
+        mkdir -p docs/data
+        echo "✓ Output directory created"
+        ls -la docs/
+    
+    - name: Run simplified data pipeline
       run: |
         cd data-pipeline
-        Rscript generate-data.R
+        echo "Current directory: $(pwd)"
+        echo "Files in directory:"
+        ls -la
+        
+        echo "Starting R data generation..."
+        Rscript generate-data-simple.R
+        
+        echo "Data generation completed. Checking output..."
+        cd ..
+        if [ -d "docs/data" ]; then
+          echo "✓ Output directory exists"
+          echo "Generated files:"
+          ls -la docs/data/
+          
+          # Verify JSON files are valid
+          for file in docs/data/*.json; do
+            if [ -f "$file" ]; then
+              echo "Validating $file..."
+              if Rscript -e "jsonlite::validate(readLines('$file'))"; then
+                echo "✓ $file is valid JSON"
+              else
+                echo "✗ $file is invalid JSON"
+                exit 1
+              fi
+            fi
+          done
+        else
+          echo "✗ Output directory missing"
+          exit 1
+        fi
       env:
-        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        R_LIBS_USER: /home/runner/.local/share/R/site-library
     
-    - name: Commit and push data updates
+    - name: Configure Git
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git config --local core.autocrlf false
+        git config --local core.safecrlf false
+    
+    - name: Check for changes and commit
+      run: |
+        echo "Checking for changes in docs/data/..."
+        
+        # Add the data files
         git add docs/data/
         
-        # Only commit if there are changes
+        # Check if there are any changes to commit
         if git diff --staged --quiet; then
-          echo "No changes to commit"
+          echo "No changes detected in data files"
+          echo "CHANGES_DETECTED=false" >> $GITHUB_ENV
         else
-          git commit -m "🤖 Update web interface data - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)
+          echo "Changes detected, preparing commit..."
+          echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
           
-          - Market data updated with latest prices
-          - Network analysis refreshed
-          - Agent performance metrics updated
-          - Risk indicators recalculated
+          # Show what changed
+          echo "Files to be committed:"
+          git diff --staged --name-only
           
-          Auto-generated by GitHub Actions"
-          git push
+          # Create commit message
+          COMMIT_MSG="🤖 Update web interface data - $(date -u +'%Y-%m-%d %H:%M:%S UTC')
+
+📊 Data Update Summary:
+- Market data refreshed for $(jq -r 'keys | length' docs/data/market_data.json) global markets
+- Network analysis updated with latest configurations  
+- Agent performance metrics recalculated
+- Risk indicators and systemic risk assessment updated
+- Metadata and system status refreshed
+
+Generated by: GitHub Actions
+Workflow: update-data.yml
+Runner: ${{ runner.os }}
+Timestamp: $(date -u --iso-8601=seconds)"
+          
+          echo "Committing changes..."
+          git commit -m "$COMMIT_MSG"
         fi
     
-    - name: Update deployment status
+    - name: Push changes
+      if: env.CHANGES_DETECTED == 'true'
       run: |
-        echo "Data pipeline completed at $(date -u)"
-        echo "Updated files:"
-        ls -la docs/data/
+        echo "Pushing changes to repository..."
+        
+        # Push with retry mechanism
+        for i in {1..3}; do
+          if git push origin main; then
+            echo "✓ Successfully pushed changes"
+            break
+          else
+            echo "✗ Push attempt $i failed, retrying in 5 seconds..."
+            sleep 5
+            if [ $i -eq 3 ]; then
+              echo "✗ Failed to push after 3 attempts"
+              exit 1
+            fi
+          fi
+        done
+    
+    - name: Generate deployment report
+      run: |
+        echo "=== DEPLOYMENT REPORT ===" 
+        echo "Pipeline completed at: $(date -u --iso-8601=seconds)"
+        echo "Repository: ${{ github.repository }}"
+        echo "Workflow: ${{ github.workflow }}"
+        echo "Run ID: ${{ github.run_id }}"
+        echo ""
+        
+        if [ "${{ env.CHANGES_DETECTED }}" = "true" ]; then
+          echo "✓ Data files updated and committed"
+          echo "✓ Changes pushed to repository"
+          echo "🌐 Web interface will be updated at: https://${{ github.repository_owner }}.github.io/WaveQTEX/"
+        else
+          echo "ℹ️  No changes detected - data is current"
+        fi
+        
+        echo ""
+        echo "Generated data files:"
+        if [ -d "docs/data" ]; then
+          for file in docs/data/*.json; do
+            if [ -f "$file" ]; then
+              size=$(stat -c%s "$file")
+              echo "  $(basename $file): ${size} bytes"
+            fi
+          done
+        fi
+        
+        echo ""
+        echo "Next scheduled update: $(date -u -d '+6 hours' --iso-8601=seconds)"
+    
+    - name: Update GitHub Pages deployment status
+      if: env.CHANGES_DETECTED == 'true'
+      run: |
+        echo "Data update completed successfully"
+        echo "GitHub Pages will automatically deploy the updated interface"
+        echo "Expected deployment URL: https://${{ github.repository_owner }}.github.io/WaveQTEX/"
