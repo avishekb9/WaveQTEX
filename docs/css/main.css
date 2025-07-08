@@ -453,6 +453,56 @@ body {
   margin: 0 auto;
 }
 
+.data-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  font-size: 0.875rem;
+}
+
+.last-updated {
+  color: var(--secondary-text);
+  font-family: var(--font-mono);
+}
+
+.data-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+}
+
+.data-indicator i {
+  font-size: 0.75rem;
+  color: var(--success-accent);
+  animation: pulse 2s infinite;
+}
+
+.data-indicator.loading i {
+  color: var(--warning-accent);
+  animation: spin 1s linear infinite;
+}
+
+.data-indicator.error i {
+  color: var(--danger-accent);
+  animation: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* Dashboard Grid */
 .dashboard-grid {
   display: grid;

@@ -1,0 +1,32 @@
+{
+  "components": {
+    "market": 0.45,
+    "credit": 0.32,
+    "liquidity": 0.38,
+    "operational": 0.25
+  },
+  "aggregate_risk": 0.36,
+  "indicators": [
+    {
+      "name": "VIX",
+      "value": 22.5,
+      "threshold": 25
+    },
+    {
+      "name": "Credit Spreads",
+      "value": 135,
+      "threshold": 150
+    },
+    {
+      "name": "Liquidity Ratio",
+      "value": 0.78,
+      "threshold": 0.8
+    },
+    {
+      "name": "Correlation",
+      "value": 0.65,
+      "threshold": 0.7
+    }
+  ],
+  "timestamp": "2025-07-08 23:34:46.793262"
+}

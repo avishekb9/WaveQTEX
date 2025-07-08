@@ -1,0 +1,130 @@
+{
+  "US_SP500": {
+    "name": "US_SP500",
+    "type": "developed",
+    "current_price": 4200,
+    "last_return": 0.012,
+    "volatility": 0.18,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "US_NASDAQ": {
+    "name": "US_NASDAQ",
+    "type": "developed",
+    "current_price": 13500,
+    "last_return": 0.008,
+    "volatility": 0.22,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "US_RUSSELL": {
+    "name": "US_RUSSELL",
+    "type": "developed",
+    "current_price": 2100,
+    "last_return": 0.006,
+    "volatility": 0.2,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "EU_STOXX": {
+    "name": "EU_STOXX",
+    "type": "developed",
+    "current_price": 4300,
+    "last_return": 0.005,
+    "volatility": 0.19,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "DE_DAX": {
+    "name": "DE_DAX",
+    "type": "developed",
+    "current_price": 15800,
+    "last_return": 0.007,
+    "volatility": 0.17,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "FR_CAC40": {
+    "name": "FR_CAC40",
+    "type": "developed",
+    "current_price": 7200,
+    "last_return": 0.004,
+    "volatility": 0.18,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "UK_FTSE": {
+    "name": "UK_FTSE",
+    "type": "developed",
+    "current_price": 7500,
+    "last_return": 0.003,
+    "volatility": 0.16,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "JP_NIKKEI": {
+    "name": "JP_NIKKEI",
+    "type": "developed",
+    "current_price": 28000,
+    "last_return": 0.009,
+    "volatility": 0.21,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "AU_ASX": {
+    "name": "AU_ASX",
+    "type": "developed",
+    "current_price": 7400,
+    "last_return": 0.006,
+    "volatility": 0.15,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "CA_TSX": {
+    "name": "CA_TSX",
+    "type": "developed",
+    "current_price": 20500,
+    "last_return": 0.005,
+    "volatility": 0.14,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "CN_SHANGHAI": {
+    "name": "CN_SHANGHAI",
+    "type": "emerging",
+    "current_price": 3200,
+    "last_return": 0.011,
+    "volatility": 0.25,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "HK_HANGSENG": {
+    "name": "HK_HANGSENG",
+    "type": "emerging",
+    "current_price": 19000,
+    "last_return": 0.008,
+    "volatility": 0.23,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "IN_SENSEX": {
+    "name": "IN_SENSEX",
+    "type": "emerging",
+    "current_price": 65000,
+    "last_return": 0.015,
+    "volatility": 0.28,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "BR_BOVESPA": {
+    "name": "BR_BOVESPA",
+    "type": "emerging",
+    "current_price": 120000,
+    "last_return": 0.012,
+    "volatility": 0.3,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "ZA_JSE": {
+    "name": "ZA_JSE",
+    "type": "emerging",
+    "current_price": 75000,
+    "last_return": 0.007,
+    "volatility": 0.24,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  },
+  "KR_KOSPI": {
+    "name": "KR_KOSPI",
+    "type": "emerging",
+    "current_price": 2500,
+    "last_return": 0.009,
+    "volatility": 0.22,
+    "timestamp": "2025-07-08 23:34:46.793262"
+  }
+}
