@@ -1,5 +1,6 @@
 // Transfer Entropy Analysis Module for WaveQTE
 // Implements dynamic Transfer Entropy calculations with user-configurable parameters
+// DEBUG VERSION - Force test results
 
 class TransferEntropyCalculator {
     constructor() {
