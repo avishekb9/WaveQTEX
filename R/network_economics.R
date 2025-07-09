@@ -513,9 +513,7 @@ simulate_network_economics <- function(model, n_periods = 100) {
 #' @param model Original model
 #' @return ggplot object
 plot_network_economics <- function(results, model) {
-  require(ggplot2)
-  require(dplyr)
-  require(tidyr)
+  # Libraries imported via NAMESPACE
   
   # Prepare data for plotting
   sri_data <- as.data.frame(results$sri)

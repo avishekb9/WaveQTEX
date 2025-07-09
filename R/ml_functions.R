@@ -298,7 +298,7 @@ train_waveqte_cnn <- function(features_data, target_variable,
   }
   
   # Use random forest as CNN proxy
-  library(randomForest)
+  # randomForest imported via NAMESPACE
   
   # Determine if classification or regression
   is_classification <- is.factor(target) || is.character(target) || 
@@ -366,7 +366,7 @@ train_waveqte_lstm <- function(time_series_data, sequence_length = 20,
   # In practice, would use keras/tensorflow for LSTM
   
   # For now, use VAR model as LSTM proxy
-  library(vars)
+  # vars imported via NAMESPACE
   
   # Prepare data for VAR model
   if (is.list(time_series_data)) {
@@ -454,7 +454,10 @@ train_waveqte_transformer <- function(features_data, target_variable,
   # In practice, would use keras/tensorflow for Transformer
   
   # For now, use XGBoost as Transformer proxy (gradient boosting with attention-like features)
-  library(xgboost)
+  # xgboost in Suggests - conditional loading
+  if (!requireNamespace("xgboost", quietly = TRUE)) {
+    stop("xgboost is needed for this function to work. Please install it with install.packages('xgboost')")
+  }
   
   # Prepare feature matrix
   feature_cols <- setdiff(names(features_data), 
@@ -608,7 +611,10 @@ train_waveqte_ensemble <- function(features_data, target_variable,
   # XGBoost model (as additional base learner)
   if ("xgboost" %in% base_models) {
     tryCatch({
-      library(xgboost)
+      # xgboost in Suggests - conditional loading
+      if (!requireNamespace("xgboost", quietly = TRUE)) {
+        stop("xgboost is needed for this function to work. Please install it with install.packages('xgboost')")
+      }
       
       # Prepare data
       feature_cols <- setdiff(names(features_data), 
@@ -671,7 +677,7 @@ train_waveqte_ensemble <- function(features_data, target_variable,
                          family = "binomial")
       }
     } else if (meta_learner == "rf") {
-      library(randomForest)
+      # randomForest imported via NAMESPACE
       meta_model <- randomForest::randomForest(x = base_predictions, 
                                               y = target_for_meta,
                                               ntree = 100)

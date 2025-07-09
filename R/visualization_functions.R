@@ -131,7 +131,7 @@ plot_qte_heatmap <- function(qte_result, scale, quantile, title = NULL,
 #' @param color_by_region Logical indicating whether to color nodes by region
 #' @return List of ggplot objects for each scale
 #' @export
-#' @importFrom igraph layout_with_fr layout_in_circle layout_with_stress
+#' @importFrom igraph layout_with_fr layout_in_circle layout_with_dh
 #' @importFrom ggplot2 ggplot aes geom_segment geom_point scale_size_continuous
 #' @examples
 #' \dontrun{
@@ -179,7 +179,7 @@ plot_network_evolution <- function(networks_result, quantile = 0.95,
     } else if (layout == "circle") {
       layout_coords <- igraph::layout_in_circle(g_filtered)
     } else if (layout == "stress") {
-      layout_coords <- igraph::layout_with_stress(g_filtered)
+      layout_coords <- layout_with_dh(g_filtered)
     } else {
       layout_coords <- igraph::layout_with_fr(g_filtered)
     }
@@ -264,7 +264,7 @@ plot_network_evolution <- function(networks_result, quantile = 0.95,
     
     # Styling
     p <- p + 
-      ggplot2::scale_size_continuous(range = c(3, 12), name = stringr::str_to_title(node_size_by)) +
+      ggplot2::scale_size_continuous(range = c(3, 12), name = str_to_title(node_size_by)) +
       ggplot2::theme_void() +
       ggplot2::theme(
         plot.title = ggplot2::element_text(hjust = 0.5),

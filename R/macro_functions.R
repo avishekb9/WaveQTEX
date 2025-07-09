@@ -349,7 +349,7 @@ prepare_ews_features <- function(networks_result, centrality_data, historical_da
 #' @return Trained prediction model
 train_crisis_prediction_model <- function(features, crisis_indicators) {
   
-  library(randomForest)
+  # randomForest imported via NAMESPACE
   
   # Prepare data
   numeric_features <- sapply(features, is.numeric)
