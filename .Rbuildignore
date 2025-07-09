@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.github$
+^docs$
+^data-pipeline$
+^data-raw$
+^TROUBLESHOOTING\.md$
+^README\.md$
+^\.git$
+^\.gitignore$
