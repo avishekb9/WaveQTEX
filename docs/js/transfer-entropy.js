@@ -42,14 +42,21 @@ class TransferEntropyCalculator {
     }
     
     setupEventListeners() {
+        console.log('Setting up Transfer Entropy event listeners...');
+        
         // Listen for Calculate TE button clicks
         document.addEventListener('click', (event) => {
+            console.log('Click event detected on:', event.target);
+            
             // Check if it's a Calculate TE button (handle various states)
             if (event.target.classList.contains('action-btn')) {
+                console.log('Action button clicked');
                 const panel = event.target.closest('.tool-panel');
                 if (panel) {
                     const heading = panel.querySelector('h3');
+                    console.log('Panel heading:', heading ? heading.textContent : 'Not found');
                     if (heading && heading.textContent === 'Transfer Entropy') {
+                        console.log('Transfer Entropy button clicked!');
                         // This is the Transfer Entropy panel's action button
                         if (event.target.id !== 'export-te-results') {
                             event.preventDefault();
@@ -404,6 +411,28 @@ class TransferEntropyCalculator {
     simulateTransferEntropy(lagOrder, quantiles) {
         console.log('Starting simulation with lagOrder:', lagOrder, 'quantiles:', quantiles);
         
+        // FORCE RETURN TEST RESULTS FOR DEBUGGING
+        const testResults = {
+            lagOrder: lagOrder,
+            quantiles: quantiles,
+            significantConnections: [
+                {source: 'US', target: 'EU', te: 0.234, pValue: 0.001, quantile: quantiles[0], lagOrder: lagOrder},
+                {source: 'EU', target: 'JP', te: 0.187, pValue: 0.01, quantile: quantiles[0], lagOrder: lagOrder},
+                {source: 'CN', target: 'IN', te: 0.156, pValue: 0.05, quantile: quantiles[0], lagOrder: lagOrder},
+                {source: 'US', target: 'CN', te: 0.143, pValue: 0.05, quantile: quantiles[0], lagOrder: lagOrder}
+            ],
+            networkMetrics: {
+                density: 0.68,
+                clustering: 0.42,
+                avgTE: 0.180,
+                totalConnections: 4
+            },
+            timestamp: new Date()
+        };
+        
+        console.log('FORCED TEST RESULTS:', testResults);
+        return testResults;
+        
         // Generate realistic Transfer Entropy values that vary with parameters
         const results = {
             lagOrder: lagOrder,
@@ -723,10 +752,13 @@ class TransferEntropyCalculator {
 let transferEntropyCalculator = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing Transfer Entropy Calculator...');
     transferEntropyCalculator = new TransferEntropyCalculator();
     
     // Make available globally
     window.transferEntropyCalculator = transferEntropyCalculator;
+    
+    console.log('Transfer Entropy Calculator initialized:', transferEntropyCalculator);
 });
 
 // Export for use in other modules
