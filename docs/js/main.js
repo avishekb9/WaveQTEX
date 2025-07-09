@@ -928,8 +928,19 @@ class WaveQTEApp {
         const output = document.getElementById('analysis-output');
         if (!output) return;
         
-        // Show loading state
+        // Special handling for Transfer Entropy - let the calculator handle it
+        if (toolType === 'transfer_entropy') {
+            // Don't interfere with the Transfer Entropy Calculator
+            // Just trigger the calculation directly
+            if (window.transferEntropyCalculator) {
+                window.transferEntropyCalculator.handleTransferEntropyCalculation();
+                return;
+            }
+        }
+        
+        // Show loading state for other analyses
         button.disabled = true;
+        const originalText = button.textContent;
         button.textContent = 'Running...';
         output.innerHTML = '<div class="loading">Running analysis...</div>';
         
@@ -953,7 +964,7 @@ class WaveQTEApp {
             
             output.innerHTML = result;
             button.disabled = false;
-            button.textContent = button.textContent.replace('Running...', '').trim();
+            button.textContent = originalText;
         }, 2000);
     }
     

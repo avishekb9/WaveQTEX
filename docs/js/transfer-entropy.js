@@ -44,9 +44,24 @@ class TransferEntropyCalculator {
     setupEventListeners() {
         // Listen for Calculate TE button clicks
         document.addEventListener('click', (event) => {
-            if (event.target.textContent === 'Calculate TE') {
-                this.handleTransferEntropyCalculation();
-            } else if (event.target.id === 'export-te-results') {
+            // Check if it's a Calculate TE button (handle various states)
+            if (event.target.classList.contains('action-btn')) {
+                const panel = event.target.closest('.tool-panel');
+                if (panel) {
+                    const heading = panel.querySelector('h3');
+                    if (heading && heading.textContent === 'Transfer Entropy') {
+                        // This is the Transfer Entropy panel's action button
+                        if (event.target.id !== 'export-te-results') {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            this.handleTransferEntropyCalculation();
+                        }
+                    }
+                }
+            }
+            
+            // Handle export button
+            if (event.target.id === 'export-te-results') {
                 this.handleExportResults();
             }
         });
@@ -71,11 +86,42 @@ class TransferEntropyCalculator {
         
         console.log(`Calculating Transfer Entropy with lag=${lagOrder}, quantiles=${quantiles}`);
         
-        // Calculate Transfer Entropy
-        const results = this.calculateTransferEntropy(lagOrder, quantiles);
+        // Find the Calculate TE button and show loading state
+        const transferEntropyPanel = Array.from(document.querySelectorAll('.tool-panel h3')).find(h3 => h3.textContent === 'Transfer Entropy');
+        const calculateButton = transferEntropyPanel ? transferEntropyPanel.parentElement.querySelector('.action-btn') : null;
+        const resultsContainer = document.querySelector('.analysis-results .output-container') || document.querySelector('#analysis-output');
         
-        // Display results
-        this.displayResults(results, lagOrder, quantiles);
+        if (calculateButton && resultsContainer) {
+            // Show loading state
+            calculateButton.disabled = true;
+            calculateButton.textContent = 'Calculating...';
+            resultsContainer.innerHTML = '<div class="loading">Calculating Transfer Entropy...</div>';
+            
+            // Use setTimeout to allow UI to update
+            setTimeout(() => {
+                try {
+                    // Calculate Transfer Entropy
+                    const results = this.calculateTransferEntropy(lagOrder, quantiles);
+                    
+                    // Display results
+                    this.displayResults(results, lagOrder, quantiles);
+                    
+                    // Reset button state
+                    calculateButton.disabled = false;
+                    calculateButton.textContent = 'Calculate TE';
+                    
+                } catch (error) {
+                    console.error('Transfer Entropy calculation failed:', error);
+                    resultsContainer.innerHTML = '<div class="error">Calculation failed. Please try again.</div>';
+                    calculateButton.disabled = false;
+                    calculateButton.textContent = 'Calculate TE';
+                }
+            }, 100);
+        } else {
+            // Fallback if button not found
+            const results = this.calculateTransferEntropy(lagOrder, quantiles);
+            this.displayResults(results, lagOrder, quantiles);
+        }
     }
     
     getLagOrder() {
@@ -482,7 +528,7 @@ class TransferEntropyCalculator {
     
     displayResults(results, lagOrder, quantiles) {
         // Find the results container
-        const resultsContainer = document.querySelector('.analysis-results');
+        const resultsContainer = document.querySelector('.analysis-results .output-container') || document.querySelector('#analysis-output');
         if (!resultsContainer) {
             console.error('Results container not found');
             return;
